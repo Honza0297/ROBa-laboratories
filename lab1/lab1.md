@@ -28,7 +28,7 @@ zapojenie ledky a rezistora do pola a blikanie s tym (mozno poskusat zmenit dela
 
 ### 3 (Vyskusanie si Input)
 
-zapojenie tlacitka na input arduino pin a blikanie led (napr aj NOT operacia)
+zapojenie tlacitka na input arduino pin a blikanie led (napr aj NOT operacia), opisat nejako debounce - v ako fuguju v realite real tlacitka / mozno aj nejake meranie na osciloscope
 
 ### 4 
 zapojenie potenciometra a citanie z analog inputu a zaroven posielanie spravy cez seriovu linku (aby vedeli debuggovat)
@@ -51,8 +51,10 @@ a to iste co v preodslej ulohe ale teraz s analog write (mozno nejake demo here 
 
 ### 6 sonar hc sr04
 
-Jednoduchý sonar ktorý používa echo/trigger na detekciu. Nacvičenie interruptu. (možno ukázať že sa to dá tak aj tak ale interrup je superior) 
+Jednoduchý sonar ktorý používa echo/trigger na detekciu. Nacvičenie interruptu. (možno ukázať že sa to dá tak aj tak ale interrupt je superior) 
 kod by vratil cas v ms (pripade us)
+* Signál z HC-SR04 bych zpracovával různými způsoby: manuálně, přes interrupty, přes funkci pulseIn(), přes nějakou knihovnu jestli pro HC-SR04 existuje... a popsal bych rozdíly, výhody a nevýhody.
+
 
 ### uloha num 2
 kedze predosla uloha vracia cas v sekundach tak uloha pre studentov by bola nech to prekonvertuju na centimetre ( rychlost zvuku ) (podla mna to dobre prepaja fyzikalny svet s tym co je v PC)  
