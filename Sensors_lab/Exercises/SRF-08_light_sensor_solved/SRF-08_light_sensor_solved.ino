@@ -97,6 +97,5 @@ void loop() {
   // *** Note - use plotter in arduino IDE to visualise the values as graph
   Serial.print("Light sensor:"); 
   Serial.print(light_sensor);
-  Serial.println(" cm");
 
 }
