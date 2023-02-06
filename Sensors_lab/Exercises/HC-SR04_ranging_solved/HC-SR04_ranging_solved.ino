@@ -4,7 +4,7 @@
 #define trigPin 3 // Attach pin D3 Arduino to pin Trig of HC-SR04
 
 long duration;   // Variable for the duration of sound wave travel
-int distance;    // Variable for the distance measurement
+double distance; // Variable for the distance measurement
 
 double speed_of_sound = 0.034;
 
@@ -57,7 +57,7 @@ void loop() {
   duration = pulseIn(echoPin, HIGH);
   
   // Calculating the distance
-  distance = duration * speed_of_sound / 2; // Calculate distance in cm ivided by 2 (go and back)
+  distance = duration * speed_of_sound / 2.0; // Calculate distance in cm ivided by 2 (go and back)
 
 
 
