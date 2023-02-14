@@ -96,6 +96,6 @@ void loop() {
   // Print the distance
   // *** Note - use plotter in arduino IDE to visualise the values as graph
   Serial.print("Light sensor:"); 
-  Serial.print(light_sensor);
+  Serial.println(light_sensor);
 
 }
