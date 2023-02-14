@@ -36,7 +36,7 @@ void loop() {
   In order to get result in meaningfull units (like centimeters) you neeed to transform duration into distance
 
   3. Calculate distance
-    - Divide the duration with speed of sound. Dont forget to divide the result by 2 (soundwave travels twice the distance)
+    - Multiply the duration with speed_of_sound variable. Dont forget to divide the result by 2 (soundwave travels twice the distance)
     - Result will be in cm
   
   See the Serial monitor/plotter for results.
