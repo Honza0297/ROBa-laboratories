@@ -57,7 +57,7 @@
   analogRead(pin)
   
   
-  /* Reads a pulse (either HIGH or LOW) on a pin.
+  /*   Reads a pulse (either HIGH or LOW) on a pin.
    *    pin: the number of the Arduino pin on which you want to read the pulse. Allowed data types: int.
    *    value: type of pulse to read: either HIGH or LOW. Allowed data types: int.
    *    Returns: The length of the pulse (in microseconds)
@@ -78,7 +78,7 @@
   delayMicroseconds(us)
 
   
-  /* Re-maps a number from one range to another. That is, a value of fromLow would get mapped to toLow, a value of fromHigh to toHigh, values in-between to values in-between, etc.
+  /*  Re-maps a number from one range to another. That is, a value of fromLow would get mapped to toLow, a value of fromHigh to toHigh, values in-between to values in-between, etc.
    *    value: the number to map.
    *    fromLow: the lower bound of the value’s current range.
    *    fromHigh: the upper bound of the value’s current range.

@@ -38,7 +38,7 @@ void loop() {
   temperature = get_temperature(Temperature_Low_Address, Temperature_High_Address);
 
   // If you wish you can uncomment this line and implement temp_2_deg()
-  //temperature = temp_2_deg(temperature)
+  //temperature = temp_2_deg(temperature);
 
   // Pretty print the results using Serial communication
   Serial.print("Temperature:"); Serial.println(temperature);
