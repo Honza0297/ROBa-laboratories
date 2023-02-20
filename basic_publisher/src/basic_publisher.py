@@ -20,7 +20,11 @@ if __name__ == '__main__':
     # Infinite loop while ROS is running
     while not rospy.is_shutdown():
         # Send your own custom message
-        x = str(input("Write here message to be sent: "))
-        pub.publish(x)
+        pub.publish("Your message here")
         # Sleep for a given time
         r.sleep()
+
+
+
+
+
