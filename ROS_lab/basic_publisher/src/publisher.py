@@ -37,19 +37,3 @@ if __name__ == "__main__":
 
     Write your below this line (write it inside of the if __name__ == '__main__': condition)
     ********************************************"""
-
-    # Initialize the node
-    rospy.init_node("Basic_Publisher", anonymous=True)
-
-    # Create publisher that sends messages to topic "/chatter" and message type is String
-    pub = rospy.Publisher("/chatter", String, queue_size=10)
-
-    # Set message speed to 2Hz
-    r = rospy.Rate(2)
-
-    # Infinite loop while ROS is running
-    while not rospy.is_shutdown():
-        # Send your own custom message
-        pub.publish("Your message here")
-        # Sleep for a given time
-        r.sleep()
