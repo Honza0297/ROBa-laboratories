@@ -6,6 +6,17 @@
 import rospy
 from std_msgs.msg import String
 
+data = ""
+
+if str(data.data).__contains__("Hello"):
+
+    pub = rospy.Publisher('/chatter', String, queue_size=10)
+
+    while pub.get_num_connections() < 1:
+        pass
+
+    pub.publish("Your message here")
+
 
 # Callback function that is called when subscriber gets data
 def callback(data):
@@ -18,7 +29,7 @@ def callback(data):
         while pub.get_num_connections() < 1:
             pass
 
-        pub.publish("Dobry den to you too")
+        pub.publish("Your message here")
 
 
 # Start of the program

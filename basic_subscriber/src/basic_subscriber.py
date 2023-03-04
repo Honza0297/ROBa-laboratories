@@ -11,15 +11,6 @@ from std_msgs.msg import String
 def callback(data):
     rospy.loginfo("Received data: %s", data.data)
 
-    if str(data.data).__contains__("Hello"):
-
-        pub = rospy.Publisher('/chatter', String, queue_size=10)
-
-        while pub.get_num_connections() < 1:
-            pass
-
-        pub.publish("Dobry den to you too")
-
 
 # Start of the program
 if __name__ == '__main__':
@@ -30,3 +21,7 @@ if __name__ == '__main__':
     # callback function is called when message is received
     rospy.Subscriber("/chatter", String, callback)
     rospy.spin()
+
+
+
+
