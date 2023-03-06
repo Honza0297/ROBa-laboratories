@@ -13,7 +13,7 @@ if __name__ == "__main__":
     rospy.init_node("Basic_Publisher", anonymous=True)
 
     # Create publisher that sends messages to topic "/chatter" and message type is String
-    pub = rospy.Publisher("/chatter", String, queue_size=10)
+    pub = rospy.Publisher("/shared_chatter", String, queue_size=10)
 
     # Set message speed to 2Hz
     r = rospy.Rate(2)
