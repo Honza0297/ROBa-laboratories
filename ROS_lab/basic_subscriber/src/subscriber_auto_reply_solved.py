@@ -18,7 +18,7 @@ def callback(data):
     1. For checking if word Hello is contained in received message use:
         if "Hello" in str(data.data):
     
-    2. If Hello is found in received message create new publisher that sends String messages into /chatter topic, using:
+    2. If Hello is found in received message create new publisher that sends String messages into /shared_chatter topic, using:
         pub = rospy.Publisher()
         - make queue_size non zero value
 
@@ -36,7 +36,7 @@ def callback(data):
 
     if "Hello" in str(data.data):
 
-        pub = rospy.Publisher("/chatter", String, queue_size=10)
+        pub = rospy.Publisher("/shared_chatter", String, queue_size=10)
 
         while pub.get_num_connections() < 1:
             pass

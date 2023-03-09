@@ -29,7 +29,7 @@ if __name__ == "__main__":
         ********************************************"""
 
         # Send your own custom message
-        pub.publish("Your message here")
+        #pub.publish("Your message here")
 
         msg = input("Write here message to be sent: ")
         pub.publish(msg)
