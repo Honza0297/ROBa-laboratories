@@ -37,7 +37,7 @@ if __name__ == "__main__":
     # Initialize the node
     rospy.init_node("Basic_Subscriber", anonymous=True)
 
-    # Create subscriber that subscribes messages from topic "/chatter" of type String
+    # Subscriber that subscribes messages from topic "/chatter" of type String
     # callback function is called when message is received
     rospy.Subscriber("/chatter", String, callback)
 

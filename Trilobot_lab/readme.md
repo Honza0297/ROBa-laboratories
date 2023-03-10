@@ -28,6 +28,10 @@ Set ROS_IP=\<trilo-IP>
 
 Run roslaunch trilobot rosserial.launch 
 
+## Trilobot package
+
+On pc needs to be built tribobot package that containst message types for communication with trilobot
+
 
 ## Check if everything works
 
