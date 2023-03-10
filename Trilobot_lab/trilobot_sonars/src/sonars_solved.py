@@ -24,7 +24,7 @@ def callback(sonar_data: Sonar_data):
     rospy.loginfo(sonar_data)
 
     # Print only data from front sonar
-    rospy.loginfo("Front sonar distance: ", sonar_data.front)
+    rospy.loginfo(f"Front sonar distance: {sonar_data.front}" )
 
 
 def main():
