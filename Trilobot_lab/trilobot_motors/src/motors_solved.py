@@ -43,6 +43,7 @@ def main():
 
     msg = Twist()
     msg.linear.x = 0.2
+    #msg.angular.z = 1
       
     # Infinite loop while ROS is running
     while not rospy.is_shutdown():
