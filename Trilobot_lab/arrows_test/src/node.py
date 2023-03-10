@@ -1,62 +1,86 @@
+#!/usr/bin/env python3
+  
+# todo top comment
+
+# Import everything important
 import rospy
-from std_msgs.msg import String#Callback function to print the subscribed data on the terminal
 from geometry_msgs.msg import Twist
 
-import pygame, time
-from datetime import datetime
+# Pygame neede for keyboard control
+import pygame
 from pygame.locals import *
 
-
-
-
+# Initialize pygame window
 pygame.init()
 screen = pygame.display.set_mode((640, 480))
-pygame.display.set_caption('Pygame Keyboard Test')
+pygame.display.set_caption('Pygame - Trilobot')
 pygame.mouse.set_visible(1)
 
 
 
-def messagePublisher():
-	print("I am here")
-	message_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=50)    #initialize the Publisher node. 
+def main():
+	# Initialize the node
+	rospy.init_node('trilobot_arrow_control', anonymous=True)
 
-	#Setting anonymous=True will append random integers at the end of our publisher node
+	# Create publisher that sends messages to topic "/cmd_vel" and message type is Twist
+	pub = rospy.Publisher('/cmd_vel', Twist, queue_size=500)
+        
 
-	rospy.init_node('arrows_bad_boy', anonymous=True)    #publishes at a rate of 2 messages per second
-	rate = rospy.Rate(10)    #Keep publishing the messages until the user interrupts 
+	while not rospy.is_shutdown():			
+		multiplier = 1
 
-	while not rospy.is_shutdown():
+		# Create new Twist message instace
 		message = Twist()
-		message.linear.x = 0.0
 
+		# get pygame events
 		pygame.event.get()
-		keys=pygame.key.get_pressed()
-		print(datetime.now())
-		#print(keys)
+		# get all pressed keys
+		keys = pygame.key.get_pressed()
+
+		"""********************************************
+		Todo
+		********************************************"""
+
+		# If up arrow is pressed
+		if keys[K_LSHIFT]:
+			rospy.loginfo("UP arrow pressed")   
+			multiplier = 5
 		
+		# If up arrow is pressed
 		if keys[K_UP]:
-			print("pressed left")
-			message.linear.x = 0.3
+			rospy.loginfo("UP arrow pressed")   
+			message.linear.x = 0.3 * multiplier
+
+		# If down arrow is pressed
 		if keys[K_DOWN]:
-			message.linear.x = -0.3
-			print("pressed right")
+			rospy.loginfo("DOWN arrow pressed")  
+			message.linear.x = -0.3 * multiplier
+
+		# If left arrow is pressed
 		if keys[K_LEFT]:
-			message.angular.z = 1
-			print("pressed right")
+			rospy.loginfo("LEFT arrow pressed")  
+			message.angular.z = 1 * multiplier
+		
+		# If up right is pressed
 		if keys[K_RIGHT]:
-			message.angular.z = -1
-			print("pressed right")
-		print("Running")
-		message_publisher.publish(message)    #rate.sleep() will wait enough until the node publishes the     message to the topic
-		#print(datetime.datetime.now())
-		#rospy.loginfo(message)    #publish the message to the topic
-		rate.sleep()
+			rospy.loginfo("RIGHT arrow pressed")  
+			message.angular.z = -1 * multiplier
+
+
+		# Publish the message
+		pub.publish(message)
+		# Sleep for given time
+		rospy.sleep(0.05) 
+
+
+		""" ********************************************
+		Do not edit code under this line
+		******************************************** """
 
 
 if __name__ == '__main__':
     try:
-        messagePublisher()
-    #capture the Interrupt signals
+        main()
     except rospy.ROSInterruptException:
         pass
 
