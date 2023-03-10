@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # Infinite loop while ROS is running
     while not rospy.is_shutdown():
         """********************************************
-        Edit code below, so that it sends message give by user inpu
+        Edit code below, so that it sends message give by user input
 
         1. Get the user input with function input("Write your message here: ")
             - Save result from this function into variable
