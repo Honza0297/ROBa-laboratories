@@ -1,77 +1,105 @@
-# DO NOT skip the next commented line
-#!/usr/bin/env python
+#!/usr/bin/env python3
   
+
+# Import everything important
 import rospy
-from std_msgs.msg import String
 from trilobot.msg import Sonar_data
 from geometry_msgs.msg import Twist
 
-distance = 0.0
-messages_num = 20
-mode = "forward"
-  
-def callback(data:Sonar_data):
+# Global variables definitions
+distance = 45       # Distance read from sonar
+mode = "forward"    # Mode of the robot: forward/rotate
+
+
+
+# Callback function that sets mode to forward
+def timer_callback(event):
+    global mode
+    mode = "forward"
+    rospy.loginfo(f"Mode has been set to forward")
+
+
+# Callback function that is called when data from sensors are received
+def callback(sonar_data:Sonar_data):
     global distance 
-    # print the actual message in its raw format
-    print(data)
-    distance = data.front
-    #rospy.loginfo("Here's what was subscribed: %s", data.data)
-      
-    # otherwise simply print a convenient message on the terminal
-    print('Data from /topic_name received')
+
+    """********************************************
+    Set global variable distance to be equal to data read from front sonar
+
+    1. Set distance to be data from front sensor
+
+    ********************************************"""
+
+    distance = sonar_data.front
+    rospy.loginfo(f"Front sonar distance: {sonar_data.front}")
+
   
   
 def main():
     global mode
-    #global distance
+    global distance 
+
+    # Initialize the node
+    rospy.init_node('trilobot_navigation', anonymous=True)
+
+    # Create publisher that sends messages to topic "/cmd_vel" and message type is Twist
     pub = rospy.Publisher('/cmd_vel', Twist, queue_size=500)
 
-    # initialize a node by the name 'listener'.
-    # you may choose to name it however you like,
-    # since you don't have to use it ahead
-    rospy.init_node('betar', anonymous=True)
+    # Create subscriber that subscribes messages from topic "/trilobot/sonar_data" of type Sonar_data
+    # callback function is called when message is received
     rospy.Subscriber("/trilobot/sonar_data", Sonar_data, callback)
 
-
-			
-		#print(datetime.datetime.now())
-      
-    # spin() simply keeps python from
-    # exiting until this node is stopped
+    # Infinite loop while ROS is running
     while not rospy.is_shutdown():
-        message = Twist()
-        print(mode)
-        
-        if mode == "forward":
-            print(1)
-            message.angular.z= 0
 
-            if distance < 40:   
-                message.linear.x = 0
-                messages_sent = 0
-                mode = "rotate"
+        """********************************************
+        Todo
+        ********************************************"""
+                
+
+        message = Twist()
+        
+
+        if mode == "forward":
+            # If there is no obstacle in front of the robot, go forward
+            if distance >= 40:  
+                message.linear.x  = 0.15
+                message.angular.z = 0
+            
+            # If obstacle is found, set mode to "rotate" and set rotation for 1 second
             else:
-                message.linear.x = distance/300
-            print(message.linear.x)
+                # Debug Info
+                rospy.loginfo("Found obstacle")   
+
+                # Stop the robot
+                message.linear.x  = 0
+                message.angular.z = 0
+
+                # Set mode to "rotate"
+                mode = "rotate"
+
+                # Set timer to 1 second, after one second set mode to "forward"
+                rospy.Timer(rospy.Duration(1), timer_callback, oneshot= True)
 
         elif mode == "rotate":
-            print(2)
+            # Rotate the robot
             message.linear.x = 0
-
             message.angular.z = 1
 
-            messages_sent += 1 
-            if messages_sent >= messages_num:
-                mode = "forward"
-        print(message)
-        # do whatever you want here
+        # Publish the message
         pub.publish(message)
-        rospy.sleep(0.05)  # sleep for one second
+        # Sleep for given time
+        rospy.sleep(0.05) 
+
+
+
+        """ ********************************************
+        Do not edit code under this line
+        ******************************************** """
+
 
   
 if __name__ == '__main__':
-      
-    # you could name this function
     try:
         main()
     except rospy.ROSInterruptException:
