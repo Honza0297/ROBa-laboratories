@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
   
 import rospy
 from geometry_msgs.msg import Twist
@@ -35,7 +35,21 @@ def main():
 
     ********************************************"""
 
+    # Initialize the node
+    rospy.init_node('Motor_publisher', anonymous=True)
 
+    # Create publisher that sends messages to topic "/cmd_vel" and message type is Twist
+    pub = rospy.Publisher('/cmd_vel', Twist, queue_size=500)
+
+    msg = Twist()
+    msg.linear.x = 0.2
+      
+    # Infinite loop while ROS is running
+    while not rospy.is_shutdown():
+        # Publish the message
+        pub.publish(msg)
+        # Wait for a given time
+        rospy.sleep(0.05)  # sleep for one second
 
 
 
