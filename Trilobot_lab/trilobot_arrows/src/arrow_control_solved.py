@@ -6,7 +6,7 @@
 import rospy
 from geometry_msgs.msg import Twist
 
-# Pygame neede for keyboard control
+# Pygame needed for keyboard control
 import pygame
 from pygame.locals import *
 
@@ -56,7 +56,7 @@ def main():
             ********************************************"""
             multiplier = 1
 
-            # If up arrow is pressed
+            # If left shift is pressed
             if keys[K_LSHIFT]:
                 rospy.loginfo("UP arrow pressed")   
                 multiplier = 5

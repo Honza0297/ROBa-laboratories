@@ -6,7 +6,7 @@
 import rospy
 from geometry_msgs.msg import Twist
 
-# Pygame neede for keyboard control
+# Pygame needed for keyboard control
 import pygame
 from pygame.locals import *
 

@@ -20,11 +20,6 @@ def callback(sonar_data: Sonar_data):
         - test your implementation by placing obstacle in front of the sonar
     ********************************************"""
 
-    # Print data from the sonar
-    rospy.loginfo(sonar_data)
-
-    # Print only data from front sonar
-    rospy.loginfo("Front sonar distance: ", sonar_data.front)
 
 
 def main():
