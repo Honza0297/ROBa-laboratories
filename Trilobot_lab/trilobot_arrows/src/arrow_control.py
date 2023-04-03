@@ -40,9 +40,9 @@ def main():
             Write logic that controls trilobot movement with keyboard press
 
             1. Check what key is pressed
-                - Pressed keys are stored in dictionary called keys
+                - Pressed keys are stored in array called keys
                 - If key is pressed, value is True
-                - Acces value using: K_UP, K_DOWN, K_LEFT, K_RIGHT 
+                - Acces value using constants: K_UP, K_DOWN, K_LEFT, K_RIGHT 
                 - Sample access: keys[K_UP]
 
             2. Based on which key is pressed set speed of the trilobot
