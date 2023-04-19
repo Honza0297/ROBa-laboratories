@@ -10,11 +10,24 @@ from geometry_msgs.msg import Twist
 import pygame
 from pygame.locals import *
 
+
+
+# Draw image at screen
+def draw_image(screen):
+        # create a surface object, image is drawn on it.
+        imp = pygame.image.load("Arrows_img.jpg").convert()
+        # Using blit to copy content from one surface to other
+        screen.blit(imp, (0, 0))
+        # paint screen one time
+        pygame.display.flip()
+
+
 # Initialize pygame window
 pygame.init()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Pygame - Trilobot')
 pygame.mouse.set_visible(1)
+draw_image(screen)
 
 
 
@@ -31,9 +44,15 @@ def main():
             # Create new Twist message instace
             message = Twist()
 
-            # get pygame events
-            pygame.event.get()
-            # get all pressed keys
+            # Get pygame events
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    # If cross has been clicked, exit application
+                    exit()
+                if event.type == pygame.VIDEORESIZE:
+                    # If window has been resized, draw image again
+                    draw_image(screen)
+            # Get all pressed keys
             keys = pygame.key.get_pressed()
 
             """********************************************
