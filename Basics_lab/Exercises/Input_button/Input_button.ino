@@ -1,4 +1,10 @@
-// todo top comment
+// Filename: Input_button.ino
+// Author: Adam Fabo
+// Last edit: 24.4.2023
+// License: Feel free to use this code in any way, shape or form
+// University: FIT, BUT, Brno, Czech republic
+// This file is a part of authors bachelors thesis
+// Description: File contains code that reads digital input from pin 4 and outputs its value at pin 2
 
 int ledPin = 2;       // LED connected to digital pin 2
 int buttonPin = 4;    // Button connected to digital pin 4

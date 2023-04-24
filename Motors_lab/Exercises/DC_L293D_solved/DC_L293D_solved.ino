@@ -1,4 +1,10 @@
-// todo top comment
+// Filename: DC_L293D_solved.ino
+// Author: Adam Fabo
+// Last edit: 24.4.2023
+// License: Feel free to use this code in any way, shape or form
+// University: FIT, BUT, Brno, Czech republic
+// This file is a part of authors bachelors thesis
+// Description: File contains finished code that controls motor using L293D driver
 
 // Enables/Diasables the motor
 #define ENABLE_PIN 2 

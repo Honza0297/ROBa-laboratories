@@ -1,4 +1,10 @@
-// TODO starting comment
+// Filename: Blinking_LED.ino
+// Author: Adam Fabo
+// Last edit: 24.4.2023
+// License: Feel free to use this code in any way, shape or form
+// University: FIT, BUT, Brno, Czech republic
+// This file is a part of authors bachelors thesis
+// Description: File contains code that controls built-in LED on Arduino board
 
 
 // The setup function runs once when you press reset or power the board

@@ -1,4 +1,10 @@
-// todo main comment
+// Filename: Servo_custom_PWM_solved.ino
+// Author: Adam Fabo
+// Last edit: 24.4.2023
+// License: Feel free to use this code in any way, shape or form
+// University: FIT, BUT, Brno, Czech republic
+// This file is a part of authors bachelors thesis
+// Description: File contains finished code that controls servo motor using custom PWM implementation
 
 // Pin to which servo is connected
 #define SERVO_PIN 9 

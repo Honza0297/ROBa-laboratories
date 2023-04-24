@@ -1,4 +1,10 @@
-// todo top comment
+// Filename: IMU_magnetometer_solved.ino
+// Author: Adam Fabo
+// Last edit: 24.4.2023
+// License: Feel free to use this code in any way, shape or form
+// University: FIT, BUT, Brno, Czech republic
+// This file is a part of authors bachelors thesis
+// Description: File contains finished code that reads magnetometer data from IMU
 
 
 #include <Wire.h>

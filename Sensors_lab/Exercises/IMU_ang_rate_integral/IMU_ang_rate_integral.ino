@@ -1,4 +1,11 @@
-// todo top comment
+// Filename: IMU_ang_rate_itegral.ino
+// Author: Adam Fabo
+// Last edit: 24.4.2023
+// License: Feel free to use this code in any way, shape or form
+// University: FIT, BUT, Brno, Czech republic
+// This file is a part of authors bachelors thesis
+// Description: File contains unfinished code that integrates angular rate of IMU,
+//              therefore it gets absolute angle of the sensor
 
 
 #include <Wire.h>

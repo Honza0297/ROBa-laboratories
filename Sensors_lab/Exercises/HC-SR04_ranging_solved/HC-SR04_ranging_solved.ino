@@ -1,4 +1,10 @@
-// todo top comment
+// Filename: HC-SR04_ranging_solved.ino
+// Author: Adam Fabo
+// Last edit: 24.4.2023
+// License: Feel free to use this code in any way, shape or form
+// University: FIT, BUT, Brno, Czech republic
+// This file is a part of authors bachelors thesis
+// Description: File contains finished code that measures distance using sensor HC-SR04 with use of active waiting
 
 #define echoPin 2 // Attach pin D2 Arduino to pin Echo of HC-SR04
 #define trigPin 3 // Attach pin D3 Arduino to pin Trig of HC-SR04

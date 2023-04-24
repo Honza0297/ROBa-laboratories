@@ -1,5 +1,10 @@
-// todo top comment
-
+// Filename: PWM_fading_LED.ino
+// Author: Adam Fabo
+// Last edit: 24.4.2023
+// License: Feel free to use this code in any way, shape or form
+// University: FIT, BUT, Brno, Czech republic
+// This file is a part of authors bachelors thesis
+// Description: File contains unfinished code that controls brightness of LED
 
 
 // Pin to which you connect the LED

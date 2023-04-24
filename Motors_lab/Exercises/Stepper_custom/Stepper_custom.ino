@@ -1,4 +1,10 @@
-// todo top comment
+// Filename: Stepper_custom.ino
+// Author: Adam Fabo
+// Last edit: 24.4.2023
+// License: Feel free to use this code in any way, shape or form
+// University: FIT, BUT, Brno, Czech republic
+// This file is a part of authors bachelors thesis
+// Description: File contains unfinished code that controls stepper motor using custom implementation
 
 
 // Pins for the stepper motor IN1-4 is for ULN2003 Stepper Motor Driver

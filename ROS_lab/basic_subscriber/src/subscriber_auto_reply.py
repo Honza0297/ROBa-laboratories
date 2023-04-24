@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 
-# todo first comment
+# Filename: subscriber_auto_reply.py
+# Author: Adam Fabo
+# Last edit: 24.4.2023
+# License: Feel free to use this code in any way, shape or form
+# University: FIT, BUT, Brno, Czech republic
+# This file is a part of authors bachelors thesis
+# Description: File contains unfinished code that automatically replies with custom message when message "Hello" appears at /shared_chatter topic 
 
 # Import everything important
 import rospy

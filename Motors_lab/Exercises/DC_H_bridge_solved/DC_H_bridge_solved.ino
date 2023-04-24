@@ -1,5 +1,10 @@
-// todo top comment
-
+// Filename: DC_H_bridge_solved.ino
+// Author: Adam Fabo
+// Last edit: 24.4.2023
+// License: Feel free to use this code in any way, shape or form
+// University: FIT, BUT, Brno, Czech republic
+// This file is a part of authors bachelors thesis
+// Description: File containts finished code that controls motor using H-Bridge
 
 
 // Pins to which given transistors should be connected

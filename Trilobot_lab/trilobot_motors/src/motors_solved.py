@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-  
+
+# Filename: motors_solved.py
+# Author: Adam Fabo
+# Last edit: 24.4.2023
+# License: Feel free to use this code in any way, shape or form
+# University: FIT, BUT, Brno, Czech republic
+# This file is a part of authors bachelors thesis
+# Description: File contains finished code that controls motors on robot Trilobot
+
 import rospy
 from geometry_msgs.msg import Twist
 
