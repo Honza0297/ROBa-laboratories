@@ -30,7 +30,7 @@ def draw_image(screen):
 
 # Initialize pygame window
 pygame.init()
-screen = pygame.display.set_mode((640, 480))
+screen = pygame.display.set_mode((640, 480),pygame.RESIZABLE)
 pygame.display.set_caption('Pygame - Trilobot')
 pygame.mouse.set_visible(1)
 draw_image(screen)
