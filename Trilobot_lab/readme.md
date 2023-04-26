@@ -40,6 +40,15 @@ On PC run rostopic echo /trolobot/sonar_data
 You should be receiving data from trilobots sonars
 
 
+# Pygame and pip 
+Pygame and pip nee to be installed
+
+sudo apt update
+
+sudo apt install python3-pip
+
+pip install pygame
+
 # Running nodes in this exercise
 Folders basic_subscriber and basic_publisher need to be copies to catkin_ws/src
 
