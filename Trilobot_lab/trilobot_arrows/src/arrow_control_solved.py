@@ -83,7 +83,7 @@ def main():
 
             # If left shift is pressed
             if keys[K_LSHIFT]:
-                rospy.loginfo("UP arrow pressed")   
+                rospy.loginfo("Left Shift pressed")   
                 multiplier = 5
 
             # If up arrow is pressed
