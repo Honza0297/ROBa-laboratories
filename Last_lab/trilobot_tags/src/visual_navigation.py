@@ -8,7 +8,7 @@ import rospy
 from trilobot.msg import Sonar_data
 from geometry_msgs.msg import Twist, PoseWithCovarianceStamped, PoseWithCovariance, Pose, Point
 from apriltag_ros.msg import AprilTagDetectionArray, AprilTagDetection
-
+from math import sqrt, atan2
 
 obstacle_present = False
 tag_present = False
@@ -19,7 +19,7 @@ obstacle_distance_limit = 40
 robot_tag_distance = 0
 tag_sideway_position = 0
 
-
+angular_coeff = 1
 
 def sonar_callback(sonar_msg: Sonar_data):
     global front_distance
@@ -29,9 +29,6 @@ def sonar_callback(sonar_msg: Sonar_data):
         obstacle_present = True
     else:
         obstacle_present = False
-
-    #rospy.loginfo("Front sonar distance:{}".format(sonar_msgc.front))
-
 
 
 def tag_callback(msg: AprilTagDetectionArray):
@@ -50,20 +47,24 @@ def tag_callback(msg: AprilTagDetectionArray):
         
         robot_tag_distance = position.z
         # negative = tag is to the left, positive = tag is to the right, relative to the robot/camera
-        tag_sideway_position = position.y
-        rospy.loginfo("Tag position: {}".format(position))
+        tag_sideway_position = position.x
+        rospy.loginfo(position)
+        #rospy.loginfo("Tag position: {}".format(position))
 
-
+tag_sideway_position
 
 def main():
     global obstacle_present
     global tag_present
-
+    rospy.init_node("trilobot_tag_navigator")
     sonar_subscriber = rospy.Subscriber("/trilobot/sonar_data", Sonar_data, sonar_callback)
     apriltag_subscriber = rospy.Subscriber("/tag_detections", AprilTagDetectionArray, tag_callback)
     motor_publisher = rospy.Publisher("/cmd_vel", Twist, queue_size=500)
+
     while not rospy.is_shutdown():
         msg = Twist()
+        msg.linear.x = 0
+        msg.angular.z = 0
         if obstacle_present:
             rospy.loginfo("Found obstacle")
             # Stop the robot
@@ -75,12 +76,21 @@ def main():
             msg.linear.x = 0
             msg.angular.z = 0
         else:
-            # Arrive to the tag in two seconds, but maintain the speed between 0.3 and 0.1 m/s 
-            msg.linear.x = max(0.1, min(0.3,robot_tag_distance/2))
-            direct_distance = sqrt(robot_tag_distance**2 + tag_sideway_position**2)
+            """
+            Your task is to follow the Apriltag in the room. 
 
-            msg.angular.z = atan2(tag_sideway_position, robot_tag_distance)
+            The position of the Apriltag (relative to the robot) is expressed as:
+            * distance in x direction (in front of robot): robot_tag_distance [m]
+            * how much to the side the tag is: tag_sideway_position [m]
 
+            More specifically, you need to find linear and angular velocity for the robot to follow the tag.
+
+            HINT #1: start with printing (either with print or rospy.loginfo) the values to get familiar with them. Observe when the values is bigger/smaller, positive, negative...
+
+            Next hints will be revelaed during the exercise :) 
+            """
+            # you can delete the keyword "pass" once you get something in the "else:"" branch
+            pass
          # Publish the message
         motor_publisher.publish(msg)
         # Sleep for given time

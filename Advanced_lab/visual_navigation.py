@@ -16,10 +16,8 @@ tag_present = False
 front_distance = 45 # init value
 obstacle_distance_limit = 40
 
-robot_tag_distance = 0
-tag_sideway_position = 0
-
-
+last_delta_x = 0
+last_delta_y = 0
 
 def sonar_callback(sonar_msg: Sonar_data):
     global front_distance
@@ -36,8 +34,7 @@ def sonar_callback(sonar_msg: Sonar_data):
 
 def tag_callback(msg: AprilTagDetectionArray):
     global tag_present
-    global robot_tag_distance
-    global tag_sideway_position
+
     tag = msg.detections[0] if msg.detections else None
 
     if not tag:
@@ -47,42 +44,26 @@ def tag_callback(msg: AprilTagDetectionArray):
         # This abomination below is caused by heavy nesting of several Pose message types.
         # Observe the http://docs.ros.org/en/kinetic/api/apriltag_ros/html/msg/AprilTagDetectionArray.html message signature to find out more! :)
         position = tag.pose.pose.pose.position
-        
-        robot_tag_distance = position.z
-        # negative = tag is to the left, positive = tag is to the right, relative to the robot/camera
-        tag_sideway_position = position.y
         rospy.loginfo("Tag position: {}".format(position))
 
 
 
 def main():
-    global obstacle_present
-    global tag_present
-
+    global forced_stop
     sonar_subscriber = rospy.Subscriber("/trilobot/sonar_data", Sonar_data, sonar_callback)
     apriltag_subscriber = rospy.Subscriber("/tag_detections", AprilTagDetectionArray, tag_callback)
     motor_publisher = rospy.Publisher("/cmd_vel", Twist, queue_size=500)
     while not rospy.is_shutdown():
         msg = Twist()
-        if obstacle_present:
+        if forced_stop:
             rospy.loginfo("Found obstacle")
-            # Stop the robot
+
+                # Stop the robot
             msg.linear.x = 0
             msg.angular.z = 0
-        elif not tag_present:
-            rospy.loginfo("No tag to follow")
-            # Stop the robot
-            msg.linear.x = 0
-            msg.angular.z = 0
-        else:
-            # Arrive to the tag in two seconds, but maintain the speed between 0.3 and 0.1 m/s 
-            msg.linear.x = max(0.1, min(0.3,robot_tag_distance/2))
-            direct_distance = sqrt(robot_tag_distance**2 + tag_sideway_position**2)
-
-            msg.angular.z = atan2(tag_sideway_position, robot_tag_distance)
-
+        
          # Publish the message
-        motor_publisher.publish(msg)
+        pub.publish(msg)
         # Sleep for given time
         rospy.sleep(0.05)
 

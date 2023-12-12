@@ -8,7 +8,7 @@ import rospy
 from trilobot.msg import Sonar_data
 from geometry_msgs.msg import Twist, PoseWithCovarianceStamped, PoseWithCovariance, Pose, Point
 from apriltag_ros.msg import AprilTagDetectionArray, AprilTagDetection
-
+from math import sqrt, atan2
 
 obstacle_present = False
 tag_present = False
@@ -19,7 +19,7 @@ obstacle_distance_limit = 40
 robot_tag_distance = 0
 tag_sideway_position = 0
 
-
+angular_coeff = 1
 
 def sonar_callback(sonar_msg: Sonar_data):
     global front_distance
@@ -29,9 +29,6 @@ def sonar_callback(sonar_msg: Sonar_data):
         obstacle_present = True
     else:
         obstacle_present = False
-
-    #rospy.loginfo("Front sonar distance:{}".format(sonar_msgc.front))
-
 
 
 def tag_callback(msg: AprilTagDetectionArray):
@@ -50,15 +47,16 @@ def tag_callback(msg: AprilTagDetectionArray):
         
         robot_tag_distance = position.z
         # negative = tag is to the left, positive = tag is to the right, relative to the robot/camera
-        tag_sideway_position = position.y
-        rospy.loginfo("Tag position: {}".format(position))
+        tag_sideway_position = position.x
+        rospy.loginfo(position)
+        #rospy.loginfo("Tag position: {}".format(position))
 
-
+tag_sideway_position
 
 def main():
     global obstacle_present
     global tag_present
-
+    rospy.init_node("trilobot_tag_navigator")
     sonar_subscriber = rospy.Subscriber("/trilobot/sonar_data", Sonar_data, sonar_callback)
     apriltag_subscriber = rospy.Subscriber("/tag_detections", AprilTagDetectionArray, tag_callback)
     motor_publisher = rospy.Publisher("/cmd_vel", Twist, queue_size=500)
@@ -76,14 +74,17 @@ def main():
             msg.angular.z = 0
         else:
             # Arrive to the tag in two seconds, but maintain the speed between 0.3 and 0.1 m/s 
-            msg.linear.x = max(0.1, min(0.3,robot_tag_distance/2))
+            msg.linear.x = max(0.05, min(0.15,robot_tag_distance/2))
             direct_distance = sqrt(robot_tag_distance**2 + tag_sideway_position**2)
 
-            msg.angular.z = atan2(tag_sideway_position, robot_tag_distance)
-
+            msg.angular.z = atan2(abs(tag_sideway_position), robot_tag_distance)*angular_coeff
+            
+        if tag_sideway_position > 0:
+                msg.angular.z *= -1
          # Publish the message
         motor_publisher.publish(msg)
         # Sleep for given time
+        rospy.loginfo("Speed will be: x = {}, z = {}, sid was {}".format(msg.linear.x, msg.angular.z, tag_sideway_position))
         rospy.sleep(0.05)
 
 if __name__ == "__main__":
