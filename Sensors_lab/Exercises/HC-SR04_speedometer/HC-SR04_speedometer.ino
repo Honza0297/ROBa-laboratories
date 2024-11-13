@@ -18,7 +18,7 @@ unsigned long time_of_current_pulse  = 0;   // Needed to calculate speed
 unsigned long time_of_previous_pulse = 0;   // Needed to calculate speed
 double time_between_pulses    = 0;   // Needed to calculate speed
 
-#define MILL_TO_SEC 10000000.0
+#define MILL_TO_SEC 1000000.0
 
 
 unsigned long duration = 0;   // Difference between start and of the pulse - duration 
